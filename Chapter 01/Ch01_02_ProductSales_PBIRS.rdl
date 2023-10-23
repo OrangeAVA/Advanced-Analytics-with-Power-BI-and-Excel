@@ -1,0 +1,1098 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="SQL2022EIM">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString>Data Source=SQL2022EIM;Initial Catalog=AdventureWorksDW2019</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <rd:DataSourceID>236c4ee4-5a0e-482f-9619-a1097e042bbd</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>SQL2022EIM</DataSourceName>
+        <CommandText>SELECT
+  DimProduct.ProductKey AS [DimProduct ProductKey]
+  ,DimProduct.ProductAlternateKey
+  ,DimProduct.ProductSubcategoryKey AS [DimProduct ProductSubcategoryKey]
+  ,DimProduct.WeightUnitMeasureCode
+  ,DimProduct.SizeUnitMeasureCode
+  ,DimProduct.EnglishProductName
+  ,DimProduct.SpanishProductName
+  ,DimProduct.FrenchProductName
+  ,DimProduct.StandardCost
+  ,DimProduct.FinishedGoodsFlag
+  ,DimProduct.Color
+  ,DimProduct.SafetyStockLevel
+  ,DimProduct.ReorderPoint
+  ,DimProduct.ListPrice
+  ,DimProduct.[Size]
+  ,DimProduct.SizeRange
+  ,DimProduct.Weight
+  ,DimProduct.DaysToManufacture
+  ,DimProduct.ProductLine
+  ,DimProduct.DealerPrice
+  ,DimProduct.[Class]
+  ,DimProduct.Style
+  ,DimProduct.ModelName
+  ,DimProduct.LargePhoto
+  ,DimProduct.EnglishDescription
+  ,DimProduct.FrenchDescription
+  ,DimProduct.ChineseDescription
+  ,DimProduct.ArabicDescription
+  ,DimProduct.HebrewDescription
+  ,DimProduct.ThaiDescription
+  ,DimProduct.GermanDescription
+  ,DimProduct.JapaneseDescription
+  ,DimProduct.TurkishDescription
+  ,DimProduct.StartDate
+  ,DimProduct.EndDate
+  ,DimProduct.Status
+  ,DimProductCategory.ProductCategoryKey AS [DimProductCategory ProductCategoryKey]
+  ,DimProductCategory.ProductCategoryAlternateKey
+  ,DimProductCategory.EnglishProductCategoryName
+  ,DimProductCategory.SpanishProductCategoryName
+  ,DimProductCategory.FrenchProductCategoryName
+  ,DimProductSubcategory.ProductSubcategoryKey AS [DimProductSubcategory ProductSubcategoryKey]
+  ,DimProductSubcategory.ProductSubcategoryAlternateKey
+  ,DimProductSubcategory.EnglishProductSubcategoryName
+  ,DimProductSubcategory.SpanishProductSubcategoryName
+  ,DimProductSubcategory.FrenchProductSubcategoryName
+  ,DimProductSubcategory.ProductCategoryKey AS [DimProductSubcategory ProductCategoryKey]
+  ,FactResellerSales.ProductKey AS [FactResellerSales ProductKey]
+  ,FactResellerSales.OrderDateKey
+  ,FactResellerSales.DueDateKey
+  ,FactResellerSales.ShipDateKey
+  ,FactResellerSales.ResellerKey
+  ,FactResellerSales.EmployeeKey
+  ,FactResellerSales.PromotionKey
+  ,FactResellerSales.CurrencyKey
+  ,FactResellerSales.SalesTerritoryKey
+  ,FactResellerSales.SalesOrderNumber
+  ,FactResellerSales.SalesOrderLineNumber
+  ,FactResellerSales.RevisionNumber
+  ,FactResellerSales.OrderQuantity
+  ,FactResellerSales.UnitPrice
+  ,FactResellerSales.ExtendedAmount
+  ,FactResellerSales.UnitPriceDiscountPct
+  ,FactResellerSales.DiscountAmount
+  ,FactResellerSales.ProductStandardCost
+  ,FactResellerSales.TotalProductCost
+  ,FactResellerSales.SalesAmount
+  ,FactResellerSales.TaxAmt
+  ,FactResellerSales.Freight
+  ,FactResellerSales.CarrierTrackingNumber
+  ,FactResellerSales.CustomerPONumber
+  ,FactResellerSales.OrderDate
+  ,FactResellerSales.DueDate
+  ,FactResellerSales.ShipDate
+FROM
+  DimProductSubcategory
+  INNER JOIN DimProductCategory
+    ON DimProductSubcategory.ProductCategoryKey = DimProductCategory.ProductCategoryKey
+  INNER JOIN DimProduct
+    ON DimProductSubcategory.ProductSubcategoryKey = DimProduct.ProductSubcategoryKey
+  INNER JOIN FactResellerSales
+    ON DimProduct.ProductKey = FactResellerSales.ProductKey</CommandText>
+        <rd:DesignerState>
+          <QueryDefinition xmlns="http://schemas.microsoft.com/ReportingServices/QueryDefinition/Relational">
+            <SelectedColumns>
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ProductKey" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ProductAlternateKey" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ProductSubcategoryKey" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="WeightUnitMeasureCode" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="SizeUnitMeasureCode" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="EnglishProductName" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="SpanishProductName" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="FrenchProductName" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="StandardCost" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="FinishedGoodsFlag" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="Color" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="SafetyStockLevel" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ReorderPoint" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ListPrice" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="Size" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="SizeRange" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="Weight" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="DaysToManufacture" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ProductLine" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="DealerPrice" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="Class" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="Style" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ModelName" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="LargePhoto" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="EnglishDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="FrenchDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ChineseDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ArabicDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="HebrewDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="ThaiDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="GermanDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="JapaneseDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="TurkishDescription" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="StartDate" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="EndDate" />
+              <ColumnExpression ColumnOwner="DimProduct" ColumnName="Status" />
+              <ColumnExpression ColumnOwner="DimProductCategory" ColumnName="ProductCategoryKey" />
+              <ColumnExpression ColumnOwner="DimProductCategory" ColumnName="ProductCategoryAlternateKey" />
+              <ColumnExpression ColumnOwner="DimProductCategory" ColumnName="EnglishProductCategoryName" />
+              <ColumnExpression ColumnOwner="DimProductCategory" ColumnName="SpanishProductCategoryName" />
+              <ColumnExpression ColumnOwner="DimProductCategory" ColumnName="FrenchProductCategoryName" />
+              <ColumnExpression ColumnOwner="DimProductSubcategory" ColumnName="ProductSubcategoryKey" />
+              <ColumnExpression ColumnOwner="DimProductSubcategory" ColumnName="ProductSubcategoryAlternateKey" />
+              <ColumnExpression ColumnOwner="DimProductSubcategory" ColumnName="EnglishProductSubcategoryName" />
+              <ColumnExpression ColumnOwner="DimProductSubcategory" ColumnName="SpanishProductSubcategoryName" />
+              <ColumnExpression ColumnOwner="DimProductSubcategory" ColumnName="FrenchProductSubcategoryName" />
+              <ColumnExpression ColumnOwner="DimProductSubcategory" ColumnName="ProductCategoryKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="ProductKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="OrderDateKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="DueDateKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="ShipDateKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="ResellerKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="EmployeeKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="PromotionKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="CurrencyKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="SalesTerritoryKey" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="SalesOrderNumber" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="SalesOrderLineNumber" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="RevisionNumber" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="OrderQuantity" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="UnitPrice" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="ExtendedAmount" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="UnitPriceDiscountPct" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="DiscountAmount" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="ProductStandardCost" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="TotalProductCost" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="SalesAmount" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="TaxAmt" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="Freight" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="CarrierTrackingNumber" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="CustomerPONumber" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="OrderDate" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="DueDate" />
+              <ColumnExpression ColumnOwner="FactResellerSales" ColumnName="ShipDate" />
+            </SelectedColumns>
+            <Joins>
+              <Join Type="CROSS JOIN" ColumnOwner="DimProductSubcategory" />
+              <Join Type="INNER JOIN" ColumnOwner="DimProductCategory">
+                <On>
+                  <From ColumnOwner="DimProductSubcategory" ColumnName="ProductCategoryKey" />
+                  <To ColumnOwner="DimProductCategory" ColumnName="ProductCategoryKey" />
+                </On>
+              </Join>
+              <Join Type="INNER JOIN" ColumnOwner="DimProduct">
+                <On>
+                  <From ColumnOwner="DimProductSubcategory" ColumnName="ProductSubcategoryKey" />
+                  <To ColumnOwner="DimProduct" ColumnName="ProductSubcategoryKey" />
+                </On>
+              </Join>
+              <Join Type="INNER JOIN" ColumnOwner="FactResellerSales">
+                <On>
+                  <From ColumnOwner="DimProduct" ColumnName="ProductKey" />
+                  <To ColumnOwner="FactResellerSales" ColumnName="ProductKey" />
+                </On>
+              </Join>
+            </Joins>
+          </QueryDefinition>
+        </rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="DimProduct_ProductKey">
+          <DataField>DimProduct ProductKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ProductAlternateKey">
+          <DataField>ProductAlternateKey</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DimProduct_ProductSubcategoryKey">
+          <DataField>DimProduct ProductSubcategoryKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="WeightUnitMeasureCode">
+          <DataField>WeightUnitMeasureCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SizeUnitMeasureCode">
+          <DataField>SizeUnitMeasureCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EnglishProductName">
+          <DataField>EnglishProductName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpanishProductName">
+          <DataField>SpanishProductName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FrenchProductName">
+          <DataField>FrenchProductName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StandardCost">
+          <DataField>StandardCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="FinishedGoodsFlag">
+          <DataField>FinishedGoodsFlag</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="Color">
+          <DataField>Color</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SafetyStockLevel">
+          <DataField>SafetyStockLevel</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="ReorderPoint">
+          <DataField>ReorderPoint</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="ListPrice">
+          <DataField>ListPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Size">
+          <DataField>Size</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SizeRange">
+          <DataField>SizeRange</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Weight">
+          <DataField>Weight</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DaysToManufacture">
+          <DataField>DaysToManufacture</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ProductLine">
+          <DataField>ProductLine</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DealerPrice">
+          <DataField>DealerPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Class">
+          <DataField>Class</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Style">
+          <DataField>Style</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ModelName">
+          <DataField>ModelName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LargePhoto">
+          <DataField>LargePhoto</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
+        <Field Name="EnglishDescription">
+          <DataField>EnglishDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FrenchDescription">
+          <DataField>FrenchDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ChineseDescription">
+          <DataField>ChineseDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ArabicDescription">
+          <DataField>ArabicDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="HebrewDescription">
+          <DataField>HebrewDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ThaiDescription">
+          <DataField>ThaiDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="GermanDescription">
+          <DataField>GermanDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="JapaneseDescription">
+          <DataField>JapaneseDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="TurkishDescription">
+          <DataField>TurkishDescription</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="StartDate">
+          <DataField>StartDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="EndDate">
+          <DataField>EndDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="Status">
+          <DataField>Status</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DimProductCategory_ProductCategoryKey">
+          <DataField>DimProductCategory ProductCategoryKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ProductCategoryAlternateKey">
+          <DataField>ProductCategoryAlternateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="EnglishProductCategoryName">
+          <DataField>EnglishProductCategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpanishProductCategoryName">
+          <DataField>SpanishProductCategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FrenchProductCategoryName">
+          <DataField>FrenchProductCategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DimProductSubcategory_ProductSubcategoryKey">
+          <DataField>DimProductSubcategory ProductSubcategoryKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ProductSubcategoryAlternateKey">
+          <DataField>ProductSubcategoryAlternateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="EnglishProductSubcategoryName">
+          <DataField>EnglishProductSubcategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SpanishProductSubcategoryName">
+          <DataField>SpanishProductSubcategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="FrenchProductSubcategoryName">
+          <DataField>FrenchProductSubcategoryName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="DimProductSubcategory_ProductCategoryKey">
+          <DataField>DimProductSubcategory ProductCategoryKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="FactResellerSales_ProductKey">
+          <DataField>FactResellerSales ProductKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="OrderDateKey">
+          <DataField>OrderDateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="DueDateKey">
+          <DataField>DueDateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ShipDateKey">
+          <DataField>ShipDateKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ResellerKey">
+          <DataField>ResellerKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="EmployeeKey">
+          <DataField>EmployeeKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="PromotionKey">
+          <DataField>PromotionKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="CurrencyKey">
+          <DataField>CurrencyKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SalesTerritoryKey">
+          <DataField>SalesTerritoryKey</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="SalesOrderNumber">
+          <DataField>SalesOrderNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="SalesOrderLineNumber">
+          <DataField>SalesOrderLineNumber</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="RevisionNumber">
+          <DataField>RevisionNumber</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+        <Field Name="OrderQuantity">
+          <DataField>OrderQuantity</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="UnitPrice">
+          <DataField>UnitPrice</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="ExtendedAmount">
+          <DataField>ExtendedAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="UnitPriceDiscountPct">
+          <DataField>UnitPriceDiscountPct</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="DiscountAmount">
+          <DataField>DiscountAmount</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+        <Field Name="ProductStandardCost">
+          <DataField>ProductStandardCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TotalProductCost">
+          <DataField>TotalProductCost</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="SalesAmount">
+          <DataField>SalesAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="TaxAmt">
+          <DataField>TaxAmt</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="Freight">
+          <DataField>Freight</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="CarrierTrackingNumber">
+          <DataField>CarrierTrackingNumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CustomerPONumber">
+          <DataField>CustomerPONumber</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="OrderDate">
+          <DataField>OrderDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="DueDate">
+          <DataField>DueDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="ShipDate">
+          <DataField>ShipDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Tablix Name="Tablix1">
+            <TablixBody>
+              <TablixColumns>
+                <TablixColumn>
+                  <Width>4in</Width>
+                </TablixColumn>
+                <TablixColumn>
+                  <Width>1.5in</Width>
+                </TablixColumn>
+              </TablixColumns>
+              <TablixRows>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox5">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>English Product Name</Value>
+                                  <Style>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox5</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox2">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Sales Amount</Value>
+                                  <Style>
+                                    <FontSize>11pt</FontSize>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#666666</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EnglishProductCategoryName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EnglishProductCategoryName.Value</Value>
+                                  <Style>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EnglishProductCategoryName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox20">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!SalesAmount.Value)</Value>
+                                  <Style>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox20</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EnglishProductSubcategoryName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EnglishProductSubcategoryName.Value</Value>
+                                  <Style>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <ListLevel>1</ListLevel>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EnglishProductSubcategoryName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox24">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!SalesAmount.Value)</Value>
+                                  <Style>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox24</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="EnglishProductName">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Fields!EnglishProductName.Value</Value>
+                                  <Style>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <ListLevel>2</ListLevel>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>EnglishProductName</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BottomBorder>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                              <Width>1pt</Width>
+                            </BottomBorder>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="SalesAmount">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!SalesAmount.Value)</Value>
+                                  <Style>
+                                    <FontWeight>Normal</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>SalesAmount</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+                <TablixRow>
+                  <Height>0.25in</Height>
+                  <TablixCells>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox11">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>Total</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox15">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value>=Sum(Fields!SalesAmount.Value)</Value>
+                                  <Style>
+                                    <FontWeight>Bold</FontWeight>
+                                    <Color>#333333</Color>
+                                  </Style>
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox15</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Style>None</Style>
+                            </Border>
+                            <BackgroundColor>White</BackgroundColor>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                      </CellContents>
+                    </TablixCell>
+                  </TablixCells>
+                </TablixRow>
+              </TablixRows>
+            </TablixBody>
+            <TablixColumnHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember />
+              </TablixMembers>
+            </TablixColumnHierarchy>
+            <TablixRowHierarchy>
+              <TablixMembers>
+                <TablixMember />
+                <TablixMember>
+                  <Group Name="EnglishProductCategoryName">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!EnglishProductCategoryName.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!EnglishProductCategoryName.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember>
+                      <Group Name="EnglishProductSubcategoryName">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!EnglishProductSubcategoryName.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!EnglishProductSubcategoryName.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <TablixMembers>
+                        <TablixMember>
+                          <KeepWithGroup>After</KeepWithGroup>
+                        </TablixMember>
+                        <TablixMember>
+                          <Group Name="EnglishProductName">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!EnglishProductName.Value</GroupExpression>
+                            </GroupExpressions>
+                          </Group>
+                          <SortExpressions>
+                            <SortExpression>
+                              <Value>=Fields!EnglishProductName.Value</Value>
+                            </SortExpression>
+                          </SortExpressions>
+                          <TablixMembers>
+                            <TablixMember />
+                          </TablixMembers>
+                          <Visibility>
+                            <Hidden>true</Hidden>
+                            <ToggleItem>EnglishProductSubcategoryName</ToggleItem>
+                          </Visibility>
+                        </TablixMember>
+                      </TablixMembers>
+                      <Visibility>
+                        <Hidden>true</Hidden>
+                        <ToggleItem>EnglishProductCategoryName</ToggleItem>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixMember>
+                <TablixMember />
+              </TablixMembers>
+            </TablixRowHierarchy>
+            <DataSetName>DataSet1</DataSetName>
+            <Top>0.5in</Top>
+            <Height>1.25in</Height>
+            <Width>5.5in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Tablix>
+          <Textbox Name="ReportTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Sales by Products</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Light</FontFamily>
+                      <FontSize>28pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:WatermarkTextbox>Title</rd:WatermarkTextbox>
+            <rd:DefaultName>ReportTitle</rd:DefaultName>
+            <Height>0.5in</Height>
+            <Width>5.5in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Height>2.25in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>10.30556in</Width>
+      <Page>
+        <PageFooter>
+          <Height>2.12361in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="ExecutionTime">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!ExecutionTime</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ExecutionTime</rd:DefaultName>
+              <Top>0.2in</Top>
+              <Left>4in</Left>
+              <Height>0.25in</Height>
+              <Width>2in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>d586021f-ad29-4236-bae6-0c44b923f6c0</rd:ReportID>
+</Report>

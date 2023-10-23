@@ -1,0 +1,9 @@
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\bin\Model.asdatabase
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\bin\Model.deploymenttargets
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\bin\Model.deploymentoptions
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\obj\Development\Ch01_02_ResellerSales.smproj.AssemblyReference.cache
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\obj\Development\Ch01_02_ResellerSales.smproj.SuggestedBindingRedirects.cache
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\obj\Development\Ch01_02_ResellerSales.smproj.CoreCompileInputs.cache
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\obj\Development\Model.asdatabase
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\obj\Development\Model.deploymentoptions
+C:\PowerBIBook\Ch01\Ch01_02_ResellerSales\Ch01_02_ResellerSales\obj\Development\Model.deploymenttargets
