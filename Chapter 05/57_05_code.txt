@@ -1,0 +1,146 @@
+ProductSubcategory =
+RELATED ( DimProductSubcategory[EnglishProductSubcategoryName] )
+
+////////////////////////////////////
+
+ProductCategory =
+RELATED ( DimProductCategory[EnglishProductCategoryName] )
+
+////////////////////////////////////
+
+Total Sales =
+SUMX (
+    FactInternetSales,
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)
+
+
+////////////////////////////////////
+
+Total Sales =
+SUM ( FactInternetSales[SalesAmount] )
+
+////////////////////////////////////
+
+Sales YTD =
+TOTALYTD ( [Total Sales], FactInternetSales[OrderDate].[Date] )
+
+////////////////////////////////////
+
+Sales YTD =
+TOTALYTD ( [Total Sales], DimDate[FullDateAlternateKey] )
+
+////////////////////////////////////
+
+Total Sales =
+SUMX (
+    FactInternetSales,
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)
+
+////////////////////////////////////
+
+Total Sales SUM Invalid =
+SUM (
+    FactInternetSales,
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)
+
+////////////////////////////////////
+
+Total Sales SUM Wrong =
+SUM ( FactInternetSales[OrderQuantity] ) * SUM ( FactInternetSales[UnitPrice] )
+
+////////////////////////////////////
+
+Total Sales College Educated =
+CALCULATE (
+    [Total Sales],
+    DimCustomer[EnglishEducation] = "Bachelors"
+        || DimCustomer[EnglishEducation] = "Graduate Degree"
+)
+
+////////////////////////////////////
+
+ProductSales =
+SUMX (
+    RELATEDTABLE ( FactInternetSales ),
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)
+
+////////////////////////////////////
+
+LineSales =
+SUMX (
+    FactInternetSales,
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)
+
+////////////////////////////////////
+
+LineSales =
+FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+
+////////////////////////////////////
+
+Sales Average =
+AVERAGE ( FactInternetSales[SalesAmount] )
+
+////////////////////////////////////
+
+Average Of Sales =
+AVERAGEX (
+    FactInternetSales,
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)
+
+////////////////////////////////////
+
+Average Of Sales Bikes =
+CALCULATE ( [Average Of Sales], DimProduct[ProductCategory] = "Bikes" )
+
+////////////////////////////////////
+
+Average Of Sales Married Canadians =
+CALCULATE (
+    [Average Of Sales],
+    DimCustomer[MaritalStatus] = "M",
+    DimSalesTerritory[SalesTerritoryCountry] = "Canada"
+)
+
+////////////////////////////////////
+
+Average Of Sales Last Year =
+CALCULATE (
+    [Average Of Sales],
+    DimDate[CalendarYear]
+        = ( YEAR ( TODAY () ) - 1 )
+)
+
+////////////////////////////////////
+
+Min Sales Year =
+MINX ( FactInternetSales, YEAR ( FactInternetSales[OrderDate] ) )
+
+////////////////////////////////////
+
+Total Sales ALL =
+CALCULATE ( [Total Sales], ALL ( FactInternetSales ) )
+
+////////////////////////////////////
+
+Percent Of All Sales =
+DIVIDE ( [Total Sales], [Total Sales ALL], 0 )
+
+////////////////////////////////////
+
+Sum Of Units Balance =
+SUM ( FactProductInventory[UnitsBalance] )
+
+////////////////////////////////////
+
+Last Date Balance =
+CALCULATE (
+    SUM ( FactProductInventory[UnitsBalance] ),
+    LASTDATE ( DimDate[FullDateAlternateKey] )
+)

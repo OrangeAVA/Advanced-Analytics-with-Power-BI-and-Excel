@@ -1,0 +1,38 @@
+[SalesTerritoryCountry] = “Value”
+
+////////////////////////////////////////
+
+[SalesTerritoryCountry] = “Germany”
+
+////////////////////////////////////////
+
+[SalesTerritoryCountry] = “France”
+
+////////////////////////////////////////
+
+[SalesTerritoryCountry] <> "Germany"
+
+////////////////////////////////////////
+
+[EnglishEducation] = "Bachelors" || [EnglishEducation] = "Graduate Degree"
+
+////////////////////////////////////////
+
+[MaritalStatus] = "M" && [EnglishOccupation] = "Clerical"
+
+////////////////////////////////////////
+
+[Color] IN {"Red", "Black", "Silver"}
+
+////////////////////////////////////////
+
+NOT ( [Color] IN {"Red", "Black", "Silver"} )
+
+////////////////////////////////////////
+
+([Color], [ProductSubcategory]) IN {("Red", "Road Bikes"), ("Black", "Mountain Bikes")}
+
+////////////////////////////////////////
+
+[User] = USERPRINCIPALNAME()
+

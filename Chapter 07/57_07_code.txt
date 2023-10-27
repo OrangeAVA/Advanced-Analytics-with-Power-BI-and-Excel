@@ -1,0 +1,5 @@
+Total sales =
+SUMX (
+    FactInternetSales,
+    FactInternetSales[OrderQuantity] * FactInternetSales[UnitPrice]
+)

@@ -1,0 +1,200 @@
+let
+	variable  = "expression with function taking a parameter"
+,	variable2 = "expression with a function taking variable as a parameter"
+,	variable3 = "expression with a function taking variable2 as a parameter"
+in
+	variable3 // a final result of the code
+
+////////////////////////////////////////////////////////////////////////////////
+
+let
+// Primitive values
+    Number = 15
+,   Number2 = 15.5
+,   Text = "Hello world"
+,   Date = #date(2023, 5, 18)
+,   Time = #time(15, 45, 30)
+,   DateTime = #datetime(2023, 5, 18, 15, 45, 30)
+,   DateTime2 = Date & Time
+,   DateTimeZone = #datetimezone(2023, 5, 18, 15, 45, 30, +1, 0)
+,   Duration = #duration(0, 22, 30, 30)
+,   Logical = false
+,   NULLs = null
+// Data structures
+,   List = {1, "hello", true}
+,   Record = [First = 500, Second = 200, Third = 300]
+,   Table = #table({"Organization ID", "Item name", "Sold quantity"}, 
+        { {100, "CPU", 83}, {101, "GPU", 67}, {102, "RAM", 143} })
+,   List_within_List = { {1, 2}, {3, 4}, {5, 6}, {7, 8} }
+,   Record_within_Record = [ First = [ a = 4, b = 5, c = a + b], Second = 14, Third = 23]
+in
+    Record_within_Record
+
+
+let
+    Table_with_data_structures = #table
+    (
+        {"Lists", "Records", "Tables"},
+        {
+            { {"a", "first", "list"}, [First = 1, Record1 = 101], 
+                #table({"First", "Table"}, { {"Row", 1}, {"Row", 2} } ) 
+            },
+            { {"a", "second", "list"}, [Second = 2, Record2 = 202],
+                #table({"Second", "Table"}, { {"Row", 3}, {"Row", 4} } ) 
+            },
+            { {"a", "third", "list"}, [Third = 3, Record3 = 303], 
+                #table({"Third", "Table"}, { {"Row", 5}, {"Row", 6} } )
+            }
+        }
+    )
+in
+    Table_with_data_structures
+
+= #shared
+
+////////////////////////////////////////////////////////////////////////////////
+
+let
+    Compare1 = 5 = 5   // returns true
+,   Compare2 = 6 <> 6  // returns false
+,   Compare3 = 6 > 6   // returns false
+,   Compare4 = 6 >= 6  // returns true
+in
+    Compare4
+
+////////////////////////////////////////////////////////////////////////////////
+	
+let
+    List = {1, 2, 3, 4, 5, 6, 7, 8}
+,   Number = 3
+,   ListFiltered = List.Select(List, each _ > Number)
+in
+    ListFiltered /* The result is: 
+        {4, 5, 6, 7, 8} */
+
+////////////////////////////////////////////////////////////////////////////////
+
+let
+    a = 6, b = 4, c = 8
+,   IF = 
+        if a > b and a > c then "a is the largest" else
+        if b > a and b > c then "b is the largest" else 
+        if c > a and c > b then "c is the largest" else
+        "two or more numbers are equal"
+in
+    IF
+
+////////////////////////////////////////////////////////////////////////////////
+
+let
+    Source = {1, 2, 3, 4, 5, 6, 7, 8},
+    CustomFunction = (List as list, Addition as number) => 
+        List.Transform(List, each _ + Addition),
+    Result = CustomFunction(Source, 0.5)
+in
+    Result // is {1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5}
+
+////////////////////////////////////////////////////////////////////////////////
+//Figure 3.5: M formula language code from Complex CSV file transformation
+
+let
+    Source = Csv.Document(File.Contents("C:\Book\Ch 3\Complex CSV.csv"),[Delimiter=";", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+    #"Removed Top Rows" = Table.Skip(Source,6),
+    #"Replaced Value" = Table.ReplaceValue(#"Removed Top Rows","=<","",Replacer.ReplaceText,{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9", "Column10", "Column11", "Column12"}),
+    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value",">","",Replacer.ReplaceText,{"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9", "Column10", "Column11", "Column12"}),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Replaced Value1", [PromoteAllScalars=true]),
+    #"Filtered Rows" = Table.SelectRows(#"Promoted Headers", each ([Organization ID] <> "TOTAL")),
+    #"Replaced Value2" = Table.ReplaceValue(#"Filtered Rows",",",".",Replacer.ReplaceText,{"Purchase average price", "Sold average price", "In stock average price"}),
+    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2"," €","",Replacer.ReplaceText,{"Purchase average price", "Sold average price", "In stock average price"}),
+    #"Changed Type" = Table.TransformColumnTypes(#"Replaced Value3",{{"Organization ID", Int64.Type}, {"Market name", type text}, {"Item id", Int64.Type}, {"Item name", type text}, {"Item type", type text}, {"Color", type text}, {"Purchase quantity", Int64.Type}, {"Sold quantity", Int64.Type}, {"In stock quantity", Int64.Type}, {"Purchase average price", type number}, {"Sold average price", type number}, {"In stock average price", type number}}),
+    #"Replaced Value4" = Table.ReplaceValue(#"Changed Type","","Not available",Replacer.ReplaceValue,{"Color"})
+in
+    #"Replaced Value4"
+	
+////////////////////////////////////////////////////////////////////////////////
+//Figure 3.6: Complex CSV’s query edited to improve the code’s organization
+
+let
+    FileContents = File.Contents("C:\Book\Ch 3\Complex CSV.csv")
+,   Source = Csv.Document(FileContents, [Delimiter=";", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None])
+,   RemovedTopRows = Table.Skip(Source,6)
+,   ReplacedValue = Table.ReplaceValue(RemovedTopRows,"=<","",Replacer.ReplaceText, Table.ColumnNames(RemovedTopRows))
+,   ReplacedValue1 = Table.ReplaceValue(ReplacedValue,">","",Replacer.ReplaceText, Table.ColumnNames(RemovedTopRows))
+,   PromotedHeaders = Table.PromoteHeaders(ReplacedValue1, [PromoteAllScalars=true])
+,   FilteredRows = Table.SelectRows(PromotedHeaders, each ([Organization ID] <> "TOTAL"))
+,   PriceColumnsList = {"Purchase average price", "Sold average price", "In stock average price"}
+,   ReplacedValue2 = Table.ReplaceValue(FilteredRows,",",".",Replacer.ReplaceText, PriceColumnsList)
+,   ReplacedValue3 = Table.ReplaceValue(ReplacedValue2," €","",Replacer.ReplaceText, PriceColumnsList)
+,   TypeChangesList = {
+        {"Organization ID", Int64.Type}, {"Item id", Int64.Type}, {"Purchase quantity", Int64.Type}, 
+        {"Sold quantity", Int64.Type}, {"In stock quantity", Int64.Type}, {"Purchase average price", type number}, 
+        {"Sold average price", type number}, {"In stock average price", type number}}
+,   ChangedType = Table.TransformColumnTypes(ReplacedValue3, TypeChangesList)
+,   ReplacedValue4 = Table.ReplaceValue(ChangedType,"","Not available",Replacer.ReplaceValue,{"Color"})
+in
+    ReplacedValue4
+
+////////////////////////////////////////////////////////////////////////////////
+// GetDataFromTable
+
+let
+    Function = (Table as table, ColumnNumber as number, RowNumber as number)
+    as list =>
+    let
+        ListOfColumnNames = Table.ColumnNames(Table)
+    ,   SelectColumnName = ListOfColumnNames{ColumnNumber-1}
+    ,   SelectColumn = Table.Column(Table, SelectColumnName)
+    ,   SelectRow = SelectColumn{RowNumber - 1}
+    ,   ToText = Text.From(SelectRow)
+    ,   RowToList = Text.Split(ToText, " ")
+    in
+        RowToList
+in
+    Function
+
+////////////////////////////////////////////////////////////////////////////////
+// GetDateFromData
+
+let
+    Function = (ListOfData as list, WhichWordIsDate as number)
+    as date =>
+    let
+        FilterList = ListOfData{WhichWordIsDate - 1}
+    ,   SplitDate = Text.Split(FilterList, ".")
+    ,   TransformMe = List.Transform(SplitDate, each Number.FromText(_))
+    ,   CreateDate = #date(TransformMe{2}, TransformMe{1}, TransformMe{0})
+    in
+        CreateDate
+in
+    Function
+	
+////////////////////////////////////////////////////////////////////////////////
+// Figure 3.7: Complex CSV exercises final M formula language code
+
+let
+    FileContents = File.Contents(#"CSV Path")
+,   Source = Csv.Document(FileContents, [Delimiter=";", Columns=12, Encoding=65001, QuoteStyle=QuoteStyle.None])
+,   RowContainingDate = GetDataFromTable(Source, 1, 3)
+,   GetTheDate = GetDateFromData(RowContainingDate, 3)
+,   RemovedTopRows = Table.Skip(Source,6)
+,   ReplacedValue = Table.ReplaceValue(RemovedTopRows,"=<","",Replacer.ReplaceText, Table.ColumnNames(RemovedTopRows))
+,   ReplacedValue1 = Table.ReplaceValue(ReplacedValue,">","",Replacer.ReplaceText, Table.ColumnNames(RemovedTopRows))
+,   PromotedHeaders = Table.PromoteHeaders(ReplacedValue1, [PromoteAllScalars=true])
+,   FilteredRows = Table.SelectRows(PromotedHeaders, each ([Organization ID] <> "TOTAL"))
+,   PriceColumnsList = {"Purchase average price", "Sold average price", "In stock average price"}
+,   ReplacedValue2 = Table.ReplaceValue(FilteredRows,",",".",Replacer.ReplaceText, PriceColumnsList)
+,   ReplacedValue3 = Table.ReplaceValue(ReplacedValue2," €","",Replacer.ReplaceText, PriceColumnsList)
+,   TypeChangesList = {
+        {"Organization ID", Int64.Type}, {"Item id", Int64.Type}, {"Purchase quantity", Int64.Type}, 
+        {"Sold quantity", Int64.Type}, {"In stock quantity", Int64.Type}, {"Purchase average price", type number}, 
+        {"Sold average price", type number}, {"In stock average price", type number}}
+,   ChangedType = Table.TransformColumnTypes(ReplacedValue3, TypeChangesList)
+,   ReplacedValue4 = Table.ReplaceValue(ChangedType,"","Not available",Replacer.ReplaceValue,{"Color"})
+,   AddDateColumn = Table.AddColumn(ReplacedValue4, "Start of month", each GetTheDate, type date)
+,   ColumnOrderList = {
+        "Start of month", "Organization ID", "Market name", "Item id", "Item name",
+        "Item type", "Color", "Purchase quantity", "Sold quantity", "In stock quantity", 
+        "Purchase average price",  "Sold average price", "In stock average price"}
+,   ReorderedColumns = Table.ReorderColumns(AddDateColumn, ColumnOrderList)
+in
+    ReorderedColumns
